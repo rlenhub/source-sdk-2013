@@ -2685,6 +2685,11 @@ CWeaponPhysCannon::FindObjectResult_t CWeaponPhysCannon::FindObject( void )
 		pullDir *= (mass + 0.5) * (1/50.0f);
 	}
 
+	CPhysicsProp* pProp = dynamic_cast<CPhysicsProp*>(pObj);
+	if (pProp) {
+		pProp->OnPhysGunPull( pOwner, pullDir );
+	}
+
 	// Nudge it towards us
 	pObj->ApplyForceCenter( pullDir );
 	return OBJECT_NOT_FOUND;
